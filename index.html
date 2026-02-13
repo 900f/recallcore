@@ -10,9 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* ═══════════════════════════════════════════════════════════
-       PROFESSIONAL HISTORY REVISION HUB - PREMIUM DESIGN SYSTEM
-    ═══════════════════════════════════════════════════════════ */
+
 
 :root {
   --primary: #10b981;
@@ -7749,18 +7747,12 @@ v² = u² + 2as</div>
   </footer>
 
   <script>
-    // ═══════════════════════════════════════════════════════════
-    // SCROLL EFFECTS
-    // ═══════════════════════════════════════════════════════════
-    
+
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('navbar');
       navbar.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // ═══════════════════════════════════════════════════════════
-    // DYNAMIC NAV HEIGHT — keeps hero clear of fixed navbar
-    // ═══════════════════════════════════════════════════════════
 
     function adjustMainPadding() {
       const navHeight = document.getElementById('navbar').offsetHeight;
@@ -7768,13 +7760,8 @@ v² = u² + 2as</div>
     }
 
     window.addEventListener('resize', adjustMainPadding);
-    // Run after fonts/layout settle
     window.addEventListener('load', adjustMainPadding);
     document.addEventListener('DOMContentLoaded', adjustMainPadding);
-
-    // ═══════════════════════════════════════════════════════════
-    // DATA STRUCTURES - EXPANDED CONTENT
-    // ═══════════════════════════════════════════════════════════
 
     const coldWarTopics = [
       {
@@ -9578,11 +9565,8 @@ v² = u² + 2as</div>
 
     const allQuestions = [...coldWarQuestions, ...elizabethanQuestions];
 
-    // ═══════════════════════════════════════════════════════════
-    // QUIZ STATE
-    // ═══════════════════════════════════════════════════════════
 
-    let activeTab = 'cold'; // tracks which section the user is currently viewing
+    let activeTab = 'cold'; 
     let shuffledQuestions = [];
     let currentIndex = 0;
     let score = 0;
@@ -9598,9 +9582,6 @@ v² = u² + 2as</div>
       return a;
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // RENDER ACCORDIONS
-    // ═══════════════════════════════════════════════════════════
 
     function renderAccordions(topics, containerId) {
       const container = document.getElementById(containerId);
@@ -9647,9 +9628,6 @@ v² = u² + 2as</div>
       }
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // SUBJECT PICKER NAVIGATION
-    // ═══════════════════════════════════════════════════════════
 
     function goHome() {
       document.getElementById('subjectPicker').style.display = 'flex';
@@ -9718,9 +9696,6 @@ v² = u² + 2as</div>
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // TAB SWITCHING
-    // ═══════════════════════════════════════════════════════════
 
     function switchTab(tab) {
       const coldSection = document.getElementById('cold');
@@ -9759,19 +9734,15 @@ v² = u² + 2as</div>
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // QUIZ FUNCTIONS
-    // ═══════════════════════════════════════════════════════════
 
     function openQuiz() {
       const questionPool = activeTab === 'elizabeth' ? elizabethanQuestions : coldWarQuestions;
       const topicLabel = activeTab === 'elizabeth' ? 'Elizabethan England' : 'Cold War';
       const topicIcon = activeTab === 'elizabeth' ? 'fa-crown' : 'fa-globe';
 
-      // Build topic filter chips
       const allTopicTitles = (activeTab === 'elizabeth' ? elizabethanTopics : coldWarTopics).map(t => t.title);
       buildFilterChips(allTopicTitles);
-      selectedTopics = null; // reset filter
+      selectedTopics = null; 
 
       shuffledQuestions = shuffleArray(questionPool);
       currentIndex = 0;
@@ -9793,7 +9764,7 @@ v² = u² + 2as</div>
       document.querySelectorAll('.history-nav-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.history-nav-btn')[3].classList.add('active');
 
-      // Update quiz header to reflect the current topic
+
       document.getElementById('quizTopicLabel').innerHTML = `<i class="fas ${topicIcon}" style="margin-right:0.4rem;"></i>${topicLabel}`;
       document.getElementById('totalQ').textContent = shuffledQuestions.length;
       updateScoreDisplay();
@@ -9930,11 +9901,9 @@ v² = u² + 2as</div>
       document.getElementById('currentQ').textContent = shuffledQuestions.length;
       document.getElementById('feedback').style.display = 'none';
 
-      // Save score to history
       saveScoreHistory(acc, activeTab);
       updateStreak();
 
-      // Show review of wrong answers
       if (wrongAnswers.length > 0) {
         const reviewPanel = document.getElementById('reviewPanel');
         const reviewList = document.getElementById('reviewList');
@@ -9981,11 +9950,8 @@ v² = u² + 2as</div>
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // NEW FEATURE VARIABLES
-    // ═══════════════════════════════════════════════════════════
 
-    let quizMode = 'typed'; // 'typed' or 'mc'
+    let quizMode = 'typed'; 
     let wrongAnswers = [];
     let reviewShown = false;
     let selectedTopics = null;
@@ -9993,10 +9959,6 @@ v² = u² + 2as</div>
     let fcIndex = 0;
     let coldTimelineOpen = false;
     let elizTimelineOpen = false;
-
-    // ═══════════════════════════════════════════════════════════
-    // THEME TOGGLE (light / dark)
-    // ═══════════════════════════════════════════════════════════
 
     function toggleTheme() {
       const body = document.body;
@@ -10019,9 +9981,6 @@ v² = u² + 2as</div>
       }
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // SEARCH / FILTER TOPICS
-    // ═══════════════════════════════════════════════════════════
 
     function filterTopics(prefix) {
       const input = document.getElementById(prefix + 'Search').value.toLowerCase().trim();
@@ -10043,9 +10002,6 @@ v² = u² + 2as</div>
       noResults.style.display = (visible === 0 && input) ? 'block' : 'none';
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // GENERIC HUB SEARCH — maths, bio, chem, phys
-    // ═══════════════════════════════════════════════════════════
 
     function filterHub(hubId, inputId, countId, noResultsId) {
       const input = document.getElementById(inputId).value.toLowerCase().trim();
@@ -10061,7 +10017,6 @@ v² = u² + 2as</div>
         if (match) visible++;
       });
 
-      // Show/hide section headers: hide if ALL cards in that section are hidden
       hub.querySelectorAll('section').forEach(section => {
         const sectionCards = section.querySelectorAll('.topic-card');
         const anyVisible = Array.from(sectionCards).some(c => !c.classList.contains('hidden'));
@@ -10072,7 +10027,6 @@ v² = u² + 2as</div>
       countEl.textContent = input ? visible + ' result' + (visible !== 1 ? 's' : '') : '';
       noResults.style.display = (visible === 0 && input) ? 'block' : 'none';
 
-      // Auto-open matched cards when searching, close all when cleared
       if (input) {
         cards.forEach(card => {
           if (!card.classList.contains('hidden')) {
@@ -10094,7 +10048,6 @@ v² = u² + 2as</div>
       }
     }
 
-    // Clear hub search when navigating away
     function clearHubSearch(hubId, inputId, countId, noResultsId) {
       const input = document.getElementById(inputId);
       if (input && input.value) {
@@ -10103,17 +10056,12 @@ v² = u² + 2as</div>
       }
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // RANDOM TOPIC
-    // ═══════════════════════════════════════════════════════════
-
     function randomTopic(section) {
       const topics = section === 'cold' ? coldWarTopics : elizabethanTopics;
       const idx = Math.floor(Math.random() * topics.length);
       const topic = topics[idx];
       const card = document.getElementById(topic.id);
       if (!card) return;
-      // Close all, open this one
       document.querySelectorAll('.topic-body').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.fas.fa-chevron-down').forEach(i => { i.style.transform = 'rotate(0deg)'; });
       const body = document.getElementById('body-' + topic.id);
@@ -10128,9 +10076,6 @@ v² = u² + 2as</div>
       showToast('Random topic: ' + topic.title);
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // TIMELINE VIEW
-    // ═══════════════════════════════════════════════════════════
 
     const coldWarTimeline = [
       { date: 'Feb 1945', title: 'Yalta Conference', desc: 'Big Three meet; Europe divided into zones' },
@@ -10204,21 +10149,15 @@ v² = u² + 2as</div>
       `).join('');
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // MULTIPLE CHOICE MODE
-    // ═══════════════════════════════════════════════════════════
-
     function setQuizMode(mode) {
       quizMode = mode;
       document.getElementById('modeTyped').classList.toggle('active', mode === 'typed');
       document.getElementById('modeMC').classList.toggle('active', mode === 'mc');
-      // Reload current question in new mode
       if (currentIndex < shuffledQuestions.length) loadQuestion();
     }
 
     function buildMCOptions(q) {
       const pool = (activeTab === 'elizabeth' ? elizabethanQuestions : coldWarQuestions);
-      // Pick 3 wrong answers + 1 correct
       let wrongs = shuffleArray(pool.filter(x => x.a !== q.a)).slice(0, 3).map(x => x.a);
       let options = shuffleArray([q.a, ...wrongs]);
       const container = document.getElementById('mcOptions');
@@ -10260,9 +10199,6 @@ v² = u² + 2as</div>
       updateScoreDisplay();
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // TOPIC FILTER CHIPS
-    // ═══════════════════════════════════════════════════════════
 
     function buildFilterChips(topics) {
       const wrap = document.getElementById('topicFilterWrap');
@@ -10298,9 +10234,6 @@ v² = u² + 2as</div>
       loadQuestion();
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // SPACED REPETITION
-    // ═══════════════════════════════════════════════════════════
 
     function markSpacedRepetition(q, correct) {
       let sr = JSON.parse(localStorage.getItem('hrh_sr') || '{}');
@@ -10311,9 +10244,6 @@ v² = u² + 2as</div>
       localStorage.setItem('hrh_sr', JSON.stringify(sr));
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // SCORE HISTORY + STREAK
-    // ═══════════════════════════════════════════════════════════
 
     function saveScoreHistory(acc, tab) {
       let history = JSON.parse(localStorage.getItem('hrh_history') || '[]');
@@ -10327,7 +10257,6 @@ v² = u² + 2as</div>
       let streakData = JSON.parse(localStorage.getItem('hrh_streak') || '{"count":0,"lastDate":""}');
       const yesterday = new Date(Date.now() - 86400000).toDateString();
       if (streakData.lastDate === today) {
-        // Already studied today, no change
       } else if (streakData.lastDate === yesterday) {
         streakData.count++;
         streakData.lastDate = today;
@@ -10372,10 +10301,6 @@ v² = u² + 2as</div>
       renderStatsPanel();
       showToast('History cleared.');
     }
-
-    // ═══════════════════════════════════════════════════════════
-    // FLASHCARD MODE
-    // ═══════════════════════════════════════════════════════════
 
     function openFlashcards() {
       const pool = activeTab === 'elizabeth' ? elizabethanQuestions : coldWarQuestions;
@@ -10434,12 +10359,7 @@ v² = u² + 2as</div>
       switchTab(activeTab);
     }
 
-    // ═══════════════════════════════════════════════════════════
-    // PRINT / EXPORT
-    // ═══════════════════════════════════════════════════════════
-
     function printSection(sectionId) {
-      // Open all accordions in the section so they print
       const section = document.getElementById(sectionId);
       section.querySelectorAll('.topic-body').forEach(b => b.classList.add('active'));
       section.querySelectorAll('.fas.fa-chevron-down').forEach(i => { i.style.transform = 'rotate(180deg)'; });
@@ -10457,7 +10377,6 @@ v² = u² + 2as</div>
       document.getElementById('totalQ').textContent = coldWarQuestions.length;
       loadTheme();
 
-      // Show subject picker on load — hide all hubs
       document.getElementById('historyHub').style.display = 'none';
       document.getElementById('mathsHub').style.display = 'none';
       document.getElementById('scienceHub').style.display = 'none';
@@ -10466,7 +10385,6 @@ v² = u² + 2as</div>
       document.getElementById('chemHub').style.display = 'none';
       document.getElementById('physHub').style.display = 'none';
       document.getElementById('subjectPicker').style.display = 'flex';
-      // Hide history-specific nav buttons until history is opened
       document.querySelectorAll('.history-nav-btn').forEach(b => b.style.display = 'none');
     });
 
