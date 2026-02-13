@@ -3409,6 +3409,14 @@ body.light-mode .vt-dot { border-color: var(--bg-primary); }
     </div>
   </div>
 
+  <!-- ─── MATHS SEARCH ─── -->
+  <div class="search-wrapper" id="mathsSearchWrap">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" class="search-input" id="mathsSearch" placeholder="Search all maths topics…" oninput="filterHub('mathsHub','mathsSearch','mathsCount','mathsNoResults')" autocomplete="off" />
+    <span class="search-count" id="mathsCount"></span>
+  </div>
+  <p class="no-results" id="mathsNoResults">No topics match your search.</p>
+
   <!-- ─── ALGEBRA ─── -->
   <section id="maths-algebra">
     <div class="section-header">
@@ -4393,6 +4401,14 @@ Sₙ  =  n/2 × (first term + last term)</div>
       </div>
     </div>
 
+    <!-- ─── BIO SEARCH ─── -->
+    <div class="search-wrapper" id="bioSearchWrap">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-input" id="bioSearch" placeholder="Search all biology topics…" oninput="filterHub('bioHub','bioSearch','bioCount','bioNoResults')" autocomplete="off" />
+      <span class="search-count" id="bioCount"></span>
+    </div>
+    <p class="no-results" id="bioNoResults">No topics match your search.</p>
+
     <!-- ─── TOPIC 1: CELL BIOLOGY ─── -->
     <section id="bio-cells">
       <div class="section-header">
@@ -5314,6 +5330,14 @@ Feeding → carbon compounds passed along food chain</div>
         <div class="stat-item"><div class="stat-value">AQA</div><div class="stat-label">Aligned</div></div>
       </div>
     </div>
+
+    <!-- ─── CHEM SEARCH ─── -->
+    <div class="search-wrapper" id="chemSearchWrap">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-input" id="chemSearch" placeholder="Search all chemistry topics…" oninput="filterHub('chemHub','chemSearch','chemCount','chemNoResults')" autocomplete="off" />
+      <span class="search-count" id="chemCount"></span>
+    </div>
+    <p class="no-results" id="chemNoResults">No topics match your search.</p>
 
     <!-- ─── TOPIC 1: ATOMIC STRUCTURE ─── -->
     <section id="chem-atomic">
@@ -6484,6 +6508,14 @@ Evaporate excess water to get the solid salt fertiliser</div>
         <div class="stat-item"><div class="stat-value">AQA</div><div class="stat-label">Aligned</div></div>
       </div>
     </div>
+
+    <!-- ─── PHYS SEARCH ─── -->
+    <div class="search-wrapper" id="physSearchWrap">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-input" id="physSearch" placeholder="Search all physics topics…" oninput="filterHub('physHub','physSearch','physCount','physNoResults')" autocomplete="off" />
+      <span class="search-count" id="physCount"></span>
+    </div>
+    <p class="no-results" id="physNoResults">No topics match your search.</p>
 
     <!-- ─── TOPIC 1: FORCES ─── -->
     <section id="phys-forces">
@@ -10009,6 +10041,66 @@ v² = u² + 2as</div>
       const countEl = document.getElementById(prefix + 'Count');
       countEl.textContent = input ? visible + ' result' + (visible !== 1 ? 's' : '') : '';
       noResults.style.display = (visible === 0 && input) ? 'block' : 'none';
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // GENERIC HUB SEARCH — maths, bio, chem, phys
+    // ═══════════════════════════════════════════════════════════
+
+    function filterHub(hubId, inputId, countId, noResultsId) {
+      const input = document.getElementById(inputId).value.toLowerCase().trim();
+      const hub = document.getElementById(hubId);
+      const cards = hub.querySelectorAll('.topic-card');
+      const noResults = document.getElementById(noResultsId);
+      let visible = 0;
+
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const match = !input || text.includes(input);
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+
+      // Show/hide section headers: hide if ALL cards in that section are hidden
+      hub.querySelectorAll('section').forEach(section => {
+        const sectionCards = section.querySelectorAll('.topic-card');
+        const anyVisible = Array.from(sectionCards).some(c => !c.classList.contains('hidden'));
+        section.style.display = (input && !anyVisible) ? 'none' : '';
+      });
+
+      const countEl = document.getElementById(countId);
+      countEl.textContent = input ? visible + ' result' + (visible !== 1 ? 's' : '') : '';
+      noResults.style.display = (visible === 0 && input) ? 'block' : 'none';
+
+      // Auto-open matched cards when searching, close all when cleared
+      if (input) {
+        cards.forEach(card => {
+          if (!card.classList.contains('hidden')) {
+            const body = card.querySelector('.topic-body');
+            const icon = card.querySelector('.fas.fa-chevron-down');
+            if (body) body.classList.add('active');
+            if (icon) icon.style.transform = 'rotate(180deg)';
+          }
+        });
+      } else {
+        cards.forEach(card => {
+          const body = card.querySelector('.topic-body');
+          const icon = card.querySelector('.fas.fa-chevron-down');
+          if (body) body.classList.remove('active');
+          if (icon) icon.style.transform = 'rotate(0deg)';
+          card.classList.remove('hidden');
+        });
+        hub.querySelectorAll('section').forEach(s => s.style.display = '');
+      }
+    }
+
+    // Clear hub search when navigating away
+    function clearHubSearch(hubId, inputId, countId, noResultsId) {
+      const input = document.getElementById(inputId);
+      if (input && input.value) {
+        input.value = '';
+        filterHub(hubId, inputId, countId, noResultsId);
+      }
     }
 
     // ═══════════════════════════════════════════════════════════
